@@ -13,6 +13,9 @@ Current_health_expenditure_per_capita_PPP = pd.read_csv('Data/Current_health_exp
 countries = ['United Kingdom', 'Japan', 'Denmark',
              'Finland', 'Australia', 'India', 'Canada', 'Germany', 'China', 
              'Brazil','Italy', 'Spain', 'Argentina', 'Belgium', 'France']
+
+# countries = public_health_expenditure_share_of_total_gdp['Entity'].unique()
+
 years = list(range(2015, 2022))
 
 # filtering by countires 
@@ -53,6 +56,6 @@ merged_data = merged_data.merge(oop_expenditure, on=['Country Name', 'Year'], ho
 merged_data = merged_data.merge(current_health_expenditure, on=['Country Name', 'Year'], how='inner')
 
 # Save the cleaned and merged dataset
-merged_data.to_csv('cleaned_merged_data.csv', index=False)
+# merged_data.to_csv('cleaned_merged_data.csv', index=False)
 
 # print(merged_data.dtypes)
