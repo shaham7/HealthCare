@@ -17,6 +17,7 @@ def regression_line(fig, x, y, df):
         )
     )
 
+
 def PHEvsLE_plotly(data=merged_data):
     fig = px.scatter(
         data,
