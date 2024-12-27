@@ -7,9 +7,12 @@ public_health_expenditure_share_of_total_gdp = pd.read_csv('Data/public-health-e
 Out_of_pocket_expenditure_per_capita_PPP_adjusted = pd.read_csv('Data/Out-of-pocket expenditure per capita, PPP (current international $).csv')
 Current_health_expenditure_per_capita_PPP = pd.read_csv('Data/Current_health_expenditure_per_capita_PPP.csv')
 
-# Countries and years I am going to work with 
-countries = ['United States', 'United Kingdom', 'Japan', 'Netherlands', 
-             'Finland', 'Australia', 'India', 'Canada', 'Germany', 'China']
+# print(public_health_expenditure_share_of_total_gdp['Entity'].unique().tolist())
+
+# Countries and years i am going to work with 
+countries = ['United Kingdom', 'Japan', 'Denmark',
+             'Finland', 'Australia', 'India', 'Canada', 'Germany', 'China', 
+             'Brazil','Italy', 'Spain', 'Argentina', 'Belgium', 'France']
 years = list(range(2015, 2022))
 
 # filtering by countires 
@@ -40,6 +43,8 @@ current_health_expenditure = current_health_expenditure.melt(id_vars=['Country N
 life_expectancy['Year'] = life_expectancy['Year'].astype(int)
 oop_expenditure['Year'] = life_expectancy['Year'].astype(int)
 current_health_expenditure['Year'] = life_expectancy['Year'].astype(int)
+current_health_expenditure['Current Health Expenditure'] = pd.to_numeric(current_health_expenditure['Current Health Expenditure'], errors='coerce')
+oop_expenditure['OOP Expenditure'] = pd.to_numeric(oop_expenditure['OOP Expenditure'], errors='coerce')
 
 # merging all datasets into one 
 merged_data = happiness.merge(life_expectancy, on=['Country Name', 'Year'], how='inner')
@@ -49,4 +54,5 @@ merged_data = merged_data.merge(current_health_expenditure, on=['Country Name', 
 
 # Save the cleaned and merged dataset
 merged_data.to_csv('cleaned_merged_data.csv', index=False)
-# print(merged_data.head())
+
+# print(merged_data.dtypes)
